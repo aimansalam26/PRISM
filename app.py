@@ -43,9 +43,9 @@ def normalise_input(data, max_hops=3):
     if type(max_hops) is not int or max_hops not in (1, 2, 3):
         raise ValueError("Maximum depth must be 1, 2 or 3 impact steps.")
     if "event" in data and "nodes" in data:
-        data = {"schema_version": "0.3", "snapshot_id": "single-scenario", "scenarios": [data]}
-    if data.get("schema_version") != "0.3":
-        raise ValueError("Expected schema 0.3. Upload data/scenarios.json, data/policies.json or a saved UI session; raw PDFs and results-only JSON are not corpus inputs.")
+        data = {"schema_version": data.get("schema_version"), "snapshot_id": data.get("snapshot_id",data.get("id","single-scenario")), "scenarios": [data]}
+    if data.get("schema_version") not in {"0.3","0.4"}:
+        raise ValueError("Expected schema 0.3 or 0.4. Upload data/scenarios.json, data/policies.json or a saved UI session; raw PDFs and results-only JSON are not corpus inputs.")
     scenarios = data.get("scenarios")
     if not isinstance(scenarios, list) or not 1 <= len(scenarios) <= 64:
         raise ValueError("A corpus must contain between 1 and 64 scenarios.")
@@ -187,17 +187,17 @@ class Handler(BaseHTTPRequestHandler):
         path = urlsplit(self.path).path
         if path == "/api/sample":
             try:
-                return self.send(200, json.loads((BASE / "data/data.json").read_text(encoding="utf-8")))
-            except (OSError, ValueError):
-                return self.send(404, {"error": "Bundled corpus missing. Place the UI beside data/scenarios.json, or upload a schema 0.3 corpus."})
-        assets = {"/": ("index.html", "text/html; charset=utf-8"), "/styles.css": ("styles.css", "text/css; charset=utf-8"), "/app.js": ("app.js", "text/javascript; charset=utf-8")}
+                return self.send(200, json.loads(next(p for p in [BASE / "data/scenarios.json", BASE / "data/data.json"] if p.is_file()).read_text(encoding="utf-8")))
+            except (OSError, ValueError, StopIteration):
+                return self.send(404, {"error": "Bundled corpus missing. Place the UI beside data/scenarios.json, or upload a schema 0.3 / 0.4 scenario or corpus."})
+        assets = {"/favicon.svg": ("favicon.svg", "image/svg+xml"), "/": ("index.html", "text/html; charset=utf-8"), "/styles.css": ("styles.css", "text/css; charset=utf-8"), "/app.js": ("app.js", "text/javascript; charset=utf-8")}
         if path not in assets:
             return self.send(404, {"error": "Not found."})
         name, mime = assets[path]
         try:
             self.send(200, (BASE / "ui" / name).read_bytes(), mime)
         except OSError:
-            self.send(404, {"error": "Missing ui/" + name + ". See UI_SETUP.md."})
+            self.send(404, {"error": "Missing ui/" + name + ". See PRISM_ENGINE_UPDATE.md."})
 
     def do_POST(self):
         if not self.local_request() or self.headers.get("X-PRISM-Client") != "local-ui":
@@ -212,6 +212,10 @@ class Handler(BaseHTTPRequestHandler):
             if not isinstance(data, dict):
                 raise ValueError("Expected a JSON object.")
             route = urlsplit(self.path).path
+            if route == "/api/shutdown":
+                self.send(200,{"stopped":True})
+                threading.Thread(target=self.server.shutdown,daemon=True).start()
+                return
             if route == "/api/run":
                 run = analyse(data.get("data"), data.get("max_hops", 3))
                 with LOCK:
@@ -239,12 +243,12 @@ class Handler(BaseHTTPRequestHandler):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--port", type=int, default=8766)
     args = parser.parse_args()
     try:
         server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
     except OSError as exc:
-        raise SystemExit(f"Could not start: {exc}. Try python app.py --port 8766") from None
+        raise SystemExit(f"Could not start: {exc}. Try python app.py --port 8767") from None
     print(f"PRISM stakeholder workspace: http://127.0.0.1:{server.server_port}")
     print("Keep this terminal open. Press Ctrl+C to stop. Download a review session to retain notes.")
     try:

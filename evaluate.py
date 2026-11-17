@@ -41,7 +41,7 @@ def read_gold(workbook,suite):
     expected={n['id'] for s in suite['scenarios'] for n in s['nodes'] if n['id']!=s['event']['root_ko']}
     gold={}
     for key,ident in labels.items():
-        if not re.fullmatch(r'A\d+',key) or not ident.startswith('S'):continue
+        if not re.fullmatch(r'A\d+',key) or key=='A1' or not ident.strip():continue
         row=key[1:]
         if ident not in expected:raise ValueError('Unknown scored item: '+ident)
         if ident in gold:raise ValueError('Duplicate gold item: '+ident)

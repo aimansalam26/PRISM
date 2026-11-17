@@ -47,7 +47,7 @@ class FinalTests(unittest.TestCase):
   with self.assertRaises(ValueError):self.accept(item)
  def test_edge_waits_for_endpoint_verification(self):
   k=copy.deepcopy(self.k);k['id']='K2';self.db.execute('INSERT INTO state VALUES (?,?)',('K2',json.dumps(k)));self.db.commit()
-  self.graph.save_edge({'source':'pilot::K1','target':'pilot::K2','relation_type':'REVIEW_ONLY','status':'approved','justification':'Fixture: related guidance','field_mappings':[],'dimension_mapping':[]},'Curator')
+  self.graph.save_edge({'source':'pilot::K1','target':'pilot::K2','relation_type':'REVIEW_ONLY','trigger_fields':['leave_days'],'status':'approved','justification':'Fixture: related guidance','field_mappings':[],'dimension_mapping':[]},'Curator')
   items=fr.packet(self.graph,check)['items'];edge=next(i for i in items if i['kind']=='edge')
   with self.assertRaises(ValueError):self.accept(edge)
   for item in items:

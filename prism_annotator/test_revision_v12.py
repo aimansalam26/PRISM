@@ -25,10 +25,10 @@ class CandidateEditing(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'jurisdictions=NL'):actions.edit(payload,'R')
   payload['decision']='proposed';self.assertEqual(actions.edit(payload,'R')['status'],'proposed')
  def test_compatibility_is_not_an_engine_export(self):
-  report=engine_compatibility.report(self.graph);self.assertFalse(report['engine_ready']);self.assertTrue(any(i['code']=='scope_unknown' for i in report['issues']))
+  report=engine_compatibility.report(self.graph);self.assertFalse(report['engine_ready']);self.assertTrue(any(i['code']=='scope_unresolved' for i in report['issues']))
  def test_existing_edges_go_stale_after_scope_edit(self):
   other=self.root/'other';shutil.copytree(self.p,other)
-  self.graph.save_edge({'source':'pilot::K1','target':'other::K1','relation_type':'REVIEW_ONLY','status':'approved','justification':'Fixture','field_mappings':[],'dimension_mapping':[]},'R')
+  self.graph.save_edge({'source':'pilot::K1','target':'other::K1','relation_type':'REVIEW_ONLY','trigger_fields':['leave_days'],'status':'approved','justification':'Fixture','field_mappings':[],'dimension_mapping':[]},'R')
   actions=NodeActions(self.graph,check);ctx=actions.context('other::K1');actions.edit({'key':'other::K1','fingerprint':ctx['fingerprint'],'decision':'proposed'},'R')
   self.assertTrue(self.graph.state()['edges'][0]['stale'])
 

@@ -35,7 +35,7 @@ def report_sheets(run, notes):
                 ["Corpus SHA256", payload["suite_sha256"]], ["Scenario count", len(run["suite"]["scenarios"])],
                 ["Interpretation", "Predictions from curated metadata. Stakeholder notes are not gold labels or authorised lifecycle decisions."],
                 ["Scope semantics", "Each scope row is a separate correlated applicability cell; do not union dimensions independently."],
-                ["Date semantics", "Start inclusive, end exclusive. Year 0001/9999 values are implementation sentinels."],
+                ["Date semantics", "Start inclusive, end exclusive. Null is unknown, not unbounded; commit dates are not policy effective dates."],
                 ["Reference check", "Computational agreement with a separate implementation; not domain accuracy."],
                 ["Export scope", "Whole active corpus; on-screen filters do not restrict this report."],
                 ["Long text", "Excel cells over 32,000 characters are marked as truncated. JSON contains the complete evidence."]]
@@ -44,7 +44,7 @@ def report_sheets(run, notes):
         for label in ("Yes", "No", "Defer"):
             overview.append([mode + " — " + label, sum(i["status"] == label for i in items)])
         overview.append([mode + " — review queue (Yes + Defer)", sum(i["status"] in {"Yes", "Defer"} for i in items)])
-    scopes = [["KO ID", "Cell", "Roles", "Jurisdictions", "Organisations", "Start inclusive", "End exclusive"]]
+    scopes = [["KO ID", "Cell", "Legacy roles", "Employment types", "Organisational roles", "Jurisdictions", "Entities / organisations", "Start inclusive", "End exclusive"]]
     paths = [["Scenario", "Mode", "KO ID", "Status", "Field", "Node path", "Edge path", "Hops", "Action", "Reason", "Scope cell", "Source evidence"]]
     decisions = [["Scenario", "Mode", "Node path", "Field", "Action", "Reason", "Surviving cells", "Evidence", "Source"]]
     changes = [["Scenario", "Kind", "Changed fields", "Previous version", "Previous text", "Revised version", "Revised text", "Change scope", "Analysis basis"]]
@@ -56,7 +56,7 @@ def report_sheets(run, notes):
             for item in result["items"]:
                 if mode == "prism":
                     for n, scope in enumerate(item["affected_scopes"], 1):
-                        scopes.append([item["ko_id"], n, ", ".join(scope["roles"]), ", ".join(scope["jurisdictions"]), ", ".join(scope["organisations"]), scope["start"], scope["end"]])
+                        scopes.append([item["ko_id"], n, ", ".join(scope.get("roles") or []), ", ".join(scope.get("employment_types") or []), ", ".join(scope.get("org_roles") or []), ", ".join(scope.get("jurisdictions") or []), ", ".join(scope.get("entities",scope.get("organisations")) or []), scope["start"], scope["end"]])
                 for p in item["paths"]:
                     paths.append([scenario["id"], mode, item["ko_id"], p["status"], p["field"], " → ".join(p["node_path"]), " → ".join(p["edge_path"]), p["hops"], p["action"], p["reason"], json.dumps(p["scope"]), p["evidence"]])
             for d in result["decisions"]:

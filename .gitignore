@@ -1,0 +1,79 @@
+# PRISM — save this file as .gitignore in the repository root.
+
+# Python environments, bytecode and build output
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+/build/
+/dist/
+
+# Test/tool caches and coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.ipynb_checkpoints/
+
+# Local credentials — keep sanitized example files trackable
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+credentials.json
+service-account*.json
+
+# Local annotation projects (source snapshots, working decisions and databases)
+/annotation_projects/
+/project_annotation/
+/prism_graph.sqlite
+**/annotations.sqlite
+**/prism_graph.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Local settings and runtime state
+.prism/
+.prism-workbench/
+*.pid
+*.log
+
+# Generated pipeline and traversal output
+/data_pipeline/artifacts/
+/output/
+/outputs/
+/backups/
+*.crlf-backup
+
+# Separate handbook checkout; retain selected evidence in your own data folders
+/handbook/
+
+# Frontend dependencies and caches
+node_modules/
+.cache/
+
+# Machine/editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vs/
+.idea/
+*.swp
+*.swo
+~$*
+
+# Intentionally NOT ignored:
+# Source code, tests, requirements, example configurations, data/ scenarios,
+# data_pipeline/raw_pilot/, evidence/, and curated research/gold datasets.
+# Export reviewed annotations to a dedicated versioned dataset folder before
+# freezing experiments; ignored working databases still need separate backups.

@@ -10,7 +10,8 @@ BASE = Path(__file__).resolve().parent
 
 
 def load_suite(path):
-    suite = json.loads(Path(path).read_text(encoding='utf-8'))
+    suite = json.loads(Path(path).read_text(encoding='utf-8-sig'))
+    if 'event' in suite and 'nodes' in suite:suite={'schema_version':suite.get('schema_version'),'snapshot_id':suite.get('snapshot_id',suite.get('id','single-scenario')),'scenarios':[suite]}
     scenarios = suite['scenarios']
     if not scenarios or len({s['id'] for s in scenarios}) != len(scenarios):
         raise ValueError('Scenario IDs must be unique and the suite nonempty.')

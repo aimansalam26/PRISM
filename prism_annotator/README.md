@@ -1,3 +1,13 @@
+# PRISM v0.13 — annotation to traversal
+
+For this combined release, follow `../PRISM_ENGINE_UPDATE.md`. It supersedes the historical installation instructions below: this release intentionally updates the root engine, reference checker and traversal UI as well as the annotator. Existing projects are retained.
+
+New: CLI [9] / `prism build-scenario`, connection certainty, explicit terminal trigger fields and editable connection applicability. Final verification includes this metadata. Unknown scope stays unknown and yields possible impact (Defer) in traversal.
+
+---
+
+## Historical v0.12 notes
+
 # PRISM v0.12 — candidate scope editing and workspace navigation
 
 ## Install

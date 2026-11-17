@@ -24,7 +24,9 @@ class GraphTests(unittest.TestCase):
  def test_terminal(self):
   e=self.edge('REVIEW_ONLY')
   with self.assertRaises(ValueError):self.g.save_edge(e,'t')
-  e['field_mappings']=[];self.g.save_edge(e,'t')
+  e['field_mappings']=[]
+  with self.assertRaisesRegex(ValueError,'trigger'):self.g.save_edge(e,'t')
+  e['trigger_fields']=['amount'];self.g.save_edge(e,'t')
  def test_adoption(self):
   e=self.edge('ADOPTS_VALUE')
   with self.assertRaises(ValueError):self.g.save_edge(e,'t')

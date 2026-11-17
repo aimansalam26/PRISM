@@ -1,92 +1,103 @@
-"""PRISM 0.2.0: bounded review discovery over curated metadata.
-
-No text interpretation or gold labels are used. See SPECIFICATION.md.
-Each queue entry carries one field, scope cell and path. Distinct scope cells
-are never merged dimension-by-dimension.
+"""PRISM 0.3.0. Explicit unknown scope, field transfer and terminal review.
+Schema 0.3 remains readable; schema 0.4 keeps employment and job roles separate.
+Unknown is represented by null, never by a population identifier or wildcard.
 """
-from collections import defaultdict, deque
+from collections import defaultdict,deque
 from copy import deepcopy
 from datetime import date
-import hashlib
-import json
+import hashlib,json
+VERSION='0.3.0'
+DIMENSIONS=('roles','jurisdictions','organisations')
+HANDBOOK_DIMENSIONS=('employment_types','org_roles','entities','jurisdictions')
+TYPES={'DEPENDS_ON','CALCULATES_VALUE','RELATED_TO','ADOPTS_VALUE','OVERRIDES','REVIEW_ONLY'}
+PROPAGATIVE={'DEPENDS_ON','CALCULATES_VALUE','ADOPTS_VALUE'}
+MODES=('prism','local','untyped')
+UNKNOWN_LABELS={'unknown','unspecified','not stated','all_dimensions','all_roles','global'}
 
-VERSION = "0.2.0"
-DIMENSIONS = ("roles", "jurisdictions", "organisations")
-TYPES = {"DEPENDS_ON", "RELATED_TO", "ADOPTS_VALUE", "OVERRIDES", "REVIEW_ONLY"}
-MODES = ("prism", "local", "untyped")
-
-
-def fingerprint(value):
-    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
-
+def fingerprint(value):return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+def dimensions(scope):return HANDBOOK_DIMENSIONS if isinstance(scope,dict) and 'employment_types' in scope else DIMENSIONS
 
 def check_scope(scope):
-    if not isinstance(scope, dict):
-        raise ValueError("Scope must be an object. Unknown metadata needs explicit handling.")
-    for dim in DIMENSIONS:
-        values = scope.get(dim)
-        if not isinstance(values, list) or not values or any(not isinstance(v, str) or not v.strip() for v in values):
-            raise ValueError(f"Scope {dim} must contain nonempty strings.")
-        if len(set(values)) != len(values) or ("*" in values and len(values) != 1):
-            raise ValueError(f"Scope {dim}: use either ['*'] or unique identifiers.")
-        if {"GLOBAL", "all_dimensions", "all_roles"} & set(values):
-            raise ValueError("Legacy wildcard detected. Use '*' explicitly.")
-    try:
-        for key in ('start','end'):
-            if date.fromisoformat(scope[key]).isoformat() != scope[key]:
-                raise ValueError('Use canonical YYYY-MM-DD dates.')
-        if date.fromisoformat(scope["start"]) >= date.fromisoformat(scope["end"]):
-            raise ValueError("Scope interval must have start < end.")
-    except (KeyError, TypeError):
-        raise ValueError("Scope requires ISO start and end dates.") from None
-
+    if not isinstance(scope,dict):raise ValueError('Scope must be an object.')
+    dims=dimensions(scope);allow_unknown=dims==HANDBOOK_DIMENSIONS
+    if set(scope)!=set(dims)|{'start','end'}:raise ValueError('Scope must contain exactly its population dimensions and start/end.')
+    for d in dims:
+        values=scope[d]
+        if values is None and allow_unknown:continue
+        if not isinstance(values,list) or not values or any(not isinstance(x,str) or not x.strip() for x in values):raise ValueError('Scope '+d+' must contain nonempty identifiers (or null in schema 0.4).')
+        if any(x.strip().lower() in UNKNOWN_LABELS for x in values):raise ValueError('Unknown/legacy scope labels are not populations. Use explicit null in schema 0.4.')
+        if len(set(values))!=len(values) or ('*' in values and len(values)!=1):raise ValueError('Use unique identifiers or an explicit standalone wildcard.')
+    for key in ['start','end']:
+        x=scope[key]
+        if x is None and allow_unknown:continue
+        try:
+            if not isinstance(x,str) or date.fromisoformat(x).isoformat()!=x:raise ValueError('Noncanonical date.')
+        except (TypeError,ValueError):raise ValueError('Scope dates must be ISO YYYY-MM-DD (or null in schema 0.4).') from None
+    if scope['start'] is not None and scope['end'] is not None and scope['start']>=scope['end']:raise ValueError('Scope start must precede end (end is exclusive).')
 
 def cells(record):
-    return record.get("scope_cells", [record.get("scope")])
+    if not isinstance(record,dict):return [None]
+    return record.get('scope_cells',[record.get('scope')])
 
+def has_unknown(scope):return any(v is None for v in scope.values())
 
 def intersection(*scopes):
-    result = deepcopy(scopes[0])
+    """Possible intersection bounds. Caller must retain uncertainty separately."""
+    result=deepcopy(scopes[0]);dims=dimensions(result)
     for other in scopes[1:]:
-        for dim in DIMENSIONS:
-            a, b = set(result[dim]), set(other[dim])
-            value = b if "*" in a else a if "*" in b else a & b
-            if not value:
-                return None
-            result[dim] = sorted(value)
-        result["start"] = max(result["start"], other["start"])
-        result["end"] = min(result["end"], other["end"])
-        if result["start"] >= result["end"]:
-            return None
+        if dimensions(other)!=dims:raise ValueError('Cannot mix scope schemas.')
+        for d in dims:
+            a,b=result[d],other[d]
+            if a is None:value=deepcopy(b)
+            elif b is None:value=deepcopy(a)
+            else:
+                aset,bset=set(a),set(b);value=sorted(bset if '*' in aset else aset if '*' in bset else aset&bset)
+                if not value:return None
+            result[d]=value
+        starts=[x for x in [result['start'],other['start']] if x is not None]
+        ends=[x for x in [result['end'],other['end']] if x is not None]
+        result['start']=max(starts) if starts else None;result['end']=min(ends) if ends else None
+        if result['start'] is not None and result['end'] is not None and result['start']>=result['end']:return None
     return result
 
+def time_window(scope):return {**{d:['*'] for d in dimensions(scope)},'start':scope['start'],'end':scope['end']}
 
-def time_window(scope):
-    return {**{d: ["*"] for d in DIMENSIONS}, "start": scope["start"], "end": scope["end"]}
+def trigger_fields(edge):
+    if edge.get('field_mappings'):return list(dict.fromkeys(m.get('source_field') for m in edge['field_mappings']))
+    return edge.get('trigger_fields') or ([edge['field']] if edge.get('field') else [])
 
+def output_fields(edge,field):
+    if edge['type'] not in PROPAGATIVE:return [field]
+    if 'field_mappings' in edge:return list(dict.fromkeys(m['target_field'] for m in edge['field_mappings'] if m['source_field']==field))
+    return [field]
 
 def validate(snapshot):
-    if snapshot.get("schema_version") != "0.3":
-        raise ValueError("Expected schema_version 0.3. Use the migrated data supplied with this release.")
+    if snapshot.get("schema_version") not in {"0.3", "0.4"}:
+        raise ValueError("Expected schema_version 0.3 (legacy) or 0.4 (handbook).")
+    expected_dims = DIMENSIONS if snapshot["schema_version"]=="0.3" else HANDBOOK_DIMENSIONS
+    def validate_cell(c):
+        check_scope(c)
+        if dimensions(c)!=expected_dims:raise ValueError("Scope dimensions do not match the scenario schema.")
     event = snapshot.get("event", {})
     if event.get("kind") not in {"value_change", "rule_change"}:
         raise ValueError("Only value_change and rule_change are supported.")
     if event.get("scope_change") or event.get("relationship_changes"):
-        raise ValueError("Withdrawal/scope or relationship changes require dual snapshots; unsupported in 0.2.0.")
+        raise ValueError("Withdrawal/scope or relationship changes require dual snapshots; unsupported in 0.3.0.")
     fields = event.get("changed_fields")
     if not isinstance(fields, list) or not fields or any(not isinstance(x, str) or not x for x in fields) or len(set(fields)) != len(fields):
         raise ValueError("changed_fields must be unique nonempty identifiers.")
-    check_scope(event.get("change_scope"))
+    validate_cell(event.get("change_scope"))
     after, before = event.get("after", {}), event.get("before", {})
-    check_scope(after.get("scope"))
-    check_scope(before.get("scope"))
+    for record in (before,after):
+        if not cells(record):raise ValueError('Before and after require scope cells.')
+        for c in cells(record):validate_cell(c)
     if before.get("scope_known", True):
-        if any(set(before["scope"][d]) != set(after["scope"][d]) for d in DIMENSIONS):
-            raise ValueError("Old/new population differs: scope-change discovery is unsupported.")
-    elif event.get("analysis_basis") != "revised_clause_only":
-        raise ValueError("Unknown prior scope requires explicit revised_clause_only analysis.")
-    if before.get("version_id") == after.get("version_id"):
-        raise ValueError("Before and after must have different version IDs.")
+        pop=lambda record:sorted(json.dumps({d:c[d] for d in expected_dims},sort_keys=True) for c in cells(record))
+        if pop(before)!=pop(after):raise ValueError('Old/new population differs: scope-change discovery is unsupported.')
+    elif event.get('analysis_basis')!='revised_clause_only':
+        raise ValueError('Unknown prior scope requires explicit revised_clause_only analysis.')
+    if not before.get('version_id') or not after.get('version_id') or before['version_id']==after['version_id']:
+        raise ValueError('Before and after need distinct nonempty version IDs.')
     nodes = snapshot.get("nodes", [])
     ids = [n.get("id") for n in nodes]
     if not ids or any(not isinstance(i, str) or not i for i in ids) or len(ids) != len(set(ids)):
@@ -95,18 +106,18 @@ def validate(snapshot):
     if root not in ids or root != after.get("version_id"):
         raise ValueError("root_ko must be the revised version present in nodes.")
     for n in nodes:
-        if not n.get("text") or not n.get("source"):
+        if not n.get("title") or not n.get("text") or not n.get("source"):
             raise ValueError(f"Missing text/provenance on {n['id']}.")
         if "scope" in n and "scope_cells" in n:
             raise ValueError("Use scope OR scope_cells.")
         if not cells(n):
             raise ValueError("At least one scope cell is required.")
         for c in cells(n):
-            check_scope(c)
+            validate_cell(c)
     node_map = {n["id"]: n for n in nodes}
-    if node_map[root]["text"] != after.get("text") or cells(node_map[root]) != [after["scope"]]:
+    if node_map[root]["text"] != after.get("text") or cells(node_map[root]) != cells(after):
         raise ValueError("Root text/scope must match revised evidence.")
-    if not intersection(after["scope"], event["change_scope"]):
+    if not any(intersection(c,event["change_scope"]) for c in cells(after)):
         raise ValueError("Change scope does not overlap the revised root.")
     edge_ids = set()
     for e in snapshot.get("relationships", []):
@@ -117,8 +128,21 @@ def validate(snapshot):
             raise ValueError(f"Unknown endpoint on {e['id']}.")
         if e.get("type") not in TYPES or not e.get("source") or not e.get("evidence"):
             raise ValueError(f"Unsupported type or missing source/evidence on {e['id']}.")
-        if e["type"] != "RELATED_TO" and (not isinstance(e.get("field"), str) or not e["field"]):
-            raise ValueError(f"Transmitting relationships need a field on {e['id']}.")
+        if 'field_mappings' in e and (not isinstance(e['field_mappings'],list) or any(not isinstance(m,dict) for m in e['field_mappings'])):raise ValueError('field_mappings must be a list of objects.')
+        if e['type']!='RELATED_TO':
+            fields_in=trigger_fields(e)
+            if not fields_in or any(not isinstance(f,str) or not f.strip() for f in fields_in):raise ValueError('Relationship needs explicit trigger fields: '+e['id'])
+            if len(set(fields_in))!=len(fields_in):raise ValueError('Duplicate trigger fields.')
+        mappings=e.get('field_mappings')
+        if mappings is not None:
+            if not isinstance(mappings,list):raise ValueError('field_mappings must be a list.')
+            if e['type'] in PROPAGATIVE and not mappings:raise ValueError('Propagative edges need field mappings.')
+            if e['type'] not in PROPAGATIVE and mappings:raise ValueError('Terminal/blocked links cannot propagate mapped fields.')
+            for m in mappings:
+                if not isinstance(m,dict) or any(not isinstance(m.get(k),str) or not m[k].strip() for k in ['source_field','target_field']):raise ValueError('Invalid field mapping.')
+                for end,key in [('prerequisite','source_field'),('dependent','target_field')]:
+                    declared=node_map[e[end]].get('watched_fields')
+                    if declared is not None and m[key] not in declared:raise ValueError('Mapping references an undeclared watched field.')
         if e.get("certainty") not in {"confirmed", "uncertain"}:
             raise ValueError(f"Declare confirmed or uncertain certainty on {e['id']}.")
         if e["certainty"] == "uncertain" and not e.get("uncertainty_reason"):
@@ -133,111 +157,103 @@ def validate(snapshot):
                 raise ValueError("Adoption requires matching source/target mapped dimensions.")
             for side in ("from", "to"):
                 for d, v in mapping[side].items():
-                    if d not in DIMENSIONS:
+                    if d not in expected_dims:
                         raise ValueError("Adoption maps population dimensions, never dates.")
-                    check_scope({**time_window(event["change_scope"]), d: v})
+                    validate_cell({**time_window(event["change_scope"]), d: v})
         if "scope" in e and "scope_cells" in e:
             raise ValueError("Use scope OR scope_cells on relationships.")
         if not cells(e):
             raise ValueError("Relationship scope cells cannot be empty.")
         for c in cells(e):
-            check_scope(c)
+            validate_cell(c)
     # Priority resolution is deliberately outside this prototype. A confirmed
     # independent replacement and inheritance must have disjoint scopes.
     for override in snapshot.get("relationships", []):
         if override['type'] != 'OVERRIDES' or override['certainty'] != 'confirmed':
             continue
         for edge in snapshot['relationships']:
-            if edge['type'] not in {'DEPENDS_ON','REVIEW_ONLY'} or edge['certainty'] != 'confirmed':
+            if edge['type'] not in {'DEPENDS_ON','CALCULATES_VALUE','REVIEW_ONLY'} or edge['certainty'] != 'confirmed':
                 continue
-            if all(edge[k] == override[k] for k in ('prerequisite','dependent','field')):
+            if all(edge[k] == override[k] for k in ('prerequisite','dependent')) and set(trigger_fields(edge)) & set(trigger_fields(override)):
                 if any(intersection(a,b) for a in cells(edge) for b in cells(override)):
                     raise ValueError('Overlapping inheritance and independent replacement: curate disjoint scopes or mark uncertainty.')
     return node_map
 
 
-def transfer(scope, edge, target, window):
-    """Known-scope transition. Keep distinct cells separate."""
-    source = deepcopy(scope)
-    if edge["type"] == "ADOPTS_VALUE":
-        mapping = edge["mapping"]
-        source = intersection(source, {**time_window(window), **mapping["from"]})
-        if source is None:
-            return []
-        source.update(deepcopy(mapping["to"]))
-    out = []
+def transfer_states(scope,edge,target,window):
+    source=deepcopy(scope);unknown=has_unknown(source)
+    if edge['type']=='ADOPTS_VALUE':
+        source=intersection(source,{**time_window(window),**edge['mapping']['from']})
+        if source is None:return []
+        source.update(deepcopy(edge['mapping']['to']))
+    out=[]
     for ec in cells(edge):
         for nc in cells(target):
-            x = intersection(source, ec, nc)
-            if x is not None and x not in out:
-                out.append(x)
+            x=intersection(source,ec,nc)
+            state=(x,unknown or has_unknown(ec) or has_unknown(nc))
+            if x is not None and state not in out:out.append(state)
     return out
 
+def transfer(scope,edge,target,window):return [s for s,u in transfer_states(scope,edge,target,window)]
 
-def discover(snapshot, mode="prism", max_hops=3):
-    nodes = validate(snapshot)
-    if mode not in MODES or type(max_hops) is not int or not 1 <= max_hops <= 3:
-        raise ValueError("Use prism/local/untyped and integer max_hops from 1 to 3.")
-    event, root = snapshot["event"], snapshot["event"]["root_ko"]
-    adjacency = defaultdict(list)
-    for e in sorted(snapshot["relationships"], key=lambda x: x["id"]):
-        adjacency[e["prerequisite"]].append(e)
-    initial = intersection(event["change_scope"], event["after"]["scope"])
-    queue = deque((root, initial, f, [], [root], False) for f in sorted(event["changed_fields"]))
-    paths, decisions, visited = defaultdict(list), [], 0
+def discover(snapshot,mode='prism',max_hops=3):
+    nodes=validate(snapshot)
+    if mode not in MODES or type(max_hops) is not int or not 1<=max_hops<=3:raise ValueError('Use prism/local/untyped and max_hops 1–3.')
+    event=snapshot['event'];root=event['root_ko'];adj=defaultdict(list)
+    for e in sorted(snapshot.get('relationships',[]),key=lambda e:e['id']):adj[e['prerequisite']].append(e)
+    queue=deque()
+    for c in cells(event['after']):
+        initial=intersection(event['change_scope'],c)
+        if initial:
+            for f in sorted(event['changed_fields']):queue.append((root,initial,f,[],[root],has_unknown(c) or has_unknown(event['change_scope']),False))
+    paths=defaultdict(list);decisions=[];visited=0
     while queue:
-        current, accumulated, field, edge_path, node_path, uncertain = queue.popleft()
-        visited += 1
-        if len(edge_path) >= max_hops:
-            continue
-        for e in adjacency[current]:
-            target = e["dependent"]
-            next_edges, next_nodes = edge_path + [e["id"]], node_path + [target]
-            decision = {"edge_path": next_edges, "node_path": next_nodes, "field": field,
-                        "edge_id": e["id"], "source": e["source"], "evidence": e["evidence"]}
-            output_scopes = []
-            if mode == "untyped":
-                action, reason, output_scopes = "continue", "structural_reachability", [None]
-            elif e["type"] == "RELATED_TO" or e["field"] != field:
-                action, reason = "exclude", "unrelated_changed_field"
-            elif e["certainty"] == "uncertain" or uncertain:
-                # An unresolved link can invalidate the constraint used to prune
-                # it. Preserve a possible path without asserting affected scope.
-                overlaps = any(intersection(time_window(event["change_scope"]), time_window(ec), time_window(nc))
-                               for ec in cells(e) for nc in cells(nodes[target]))
-                action, reason = ("defer", e.get("uncertainty_reason", "upstream_uncertainty")) if overlaps else ("exclude", "inactive_interval")
-                output_scopes = [None] if overlaps else []
-            elif e["type"] == "OVERRIDES":
-                action, reason = "exclude", "independent_replacement_of_changed_value"
+        current,accumulated,field,edge_path,node_path,uncertain,link_uncertain=queue.popleft();visited+=1
+        if len(edge_path)>=max_hops:continue
+        for e in adj[current]:
+            target=e['dependent'];next_edges=edge_path+[e['id']];next_nodes=node_path+[target]
+            base_decision={'edge_path':next_edges,'node_path':next_nodes,'field':field,'edge_id':e['id'],'source':e['source'],'evidence':e['evidence']}
+            if target in node_path:
+                decisions.append(dict(base_decision,action='exclude',reason='cycle_detected',surviving_scopes=[]));continue
+            if mode!='untyped' and (e['type']=='RELATED_TO' or field not in trigger_fields(e)):
+                decisions.append(dict(base_decision,action='exclude',reason='unrelated_changed_field',surviving_scopes=[]));continue
+            if mode!='untyped' and e['type']=='OVERRIDES' and e['certainty']=='confirmed':
+                decisions.append(dict(base_decision,action='exclude',reason='independent_replacement_of_changed_value',surviving_scopes=[]));continue
+            relation_uncertain=link_uncertain or e['certainty']=='uncertain'
+            outputs=[]
+            if mode=='untyped':outputs=[(None,False)]
+            elif relation_uncertain:
+                # An uncertain dependency can undermine population pruning. Retain only
+                # the possible temporal bounds and mark the path unresolved.
+                for ec in cells(e):
+                    for nc in cells(nodes[target]):
+                        x=intersection(time_window(accumulated),time_window(ec),time_window(nc))
+                        if x is not None and (x,True) not in outputs:outputs.append((x,True))
             else:
-                bases = [accumulated] if mode == "prism" or not edge_path else [intersection(c, time_window(event["change_scope"])) for c in cells(nodes[current])]
+                bases=[accumulated] if mode=='prism' or not edge_path else [intersection(c,time_window(event['change_scope'])) for c in cells(nodes[current])]
                 for base in bases:
-                    if base:
-                        output_scopes.extend(transfer(base, e, nodes[target], event["change_scope"]))
-                action = ("review_stop" if e["type"] == "REVIEW_ONLY" else "continue") if output_scopes else "exclude"
-                reason = "supported_dependency" if output_scopes else "empty_scope_or_inactive_interval"
-            decision.update(action=action, reason=reason, surviving_scopes=[s for s in output_scopes if s])
-            decisions.append(decision)
-            for scope in output_scopes:
-                status = "Defer" if action == "defer" else "Yes"
-                trace = {**deepcopy(decision), "scope": scope, "status": status, "hops": len(next_edges)}
-                if target != root and trace not in paths[target]:
-                    paths[target].append(trace)
-                if action != "review_stop":
-                    queue.append((target, scope, field, next_edges, next_nodes, status == "Defer"))
-    items = []
-    for ident in sorted(set(nodes) - {root}):
-        traces = paths[ident]
-        definite = [p for p in traces if p["status"] == "Yes"]
-        status = "Yes" if definite else "Defer" if traces else "No"
-        scopes = []
+                    if base is not None:
+                        for x,u in transfer_states(base,e,nodes[target],event['change_scope']):
+                            pair=(x,u or uncertain)
+                            if pair not in outputs:outputs.append(pair)
+            if not outputs:
+                decisions.append(dict(base_decision,action='exclude',reason='empty_scope_or_inactive_interval',surviving_scopes=[]));continue
+            mapped=[field] if mode=='untyped' else output_fields(e,field)
+            for next_field in mapped:
+                terminal=mode!='untyped' and e['type'] in {'REVIEW_ONLY','OVERRIDES'}
+                for scope,u in outputs:
+                    status='Defer' if u and mode!='untyped' else 'Yes'
+                    action='review_stop' if terminal else 'defer' if status=='Defer' else 'continue'
+                    reason=e.get('uncertainty_reason','upstream_uncertainty') if relation_uncertain and mode!='untyped' else 'unknown_applicability' if status=='Defer' else 'structural_reachability' if mode=='untyped' else 'supported_dependency'
+                    d=dict(base_decision,output_field=next_field if not terminal else None,action=action,reason=reason,surviving_scopes=[scope] if scope is not None and status=='Yes' else [])
+                    if d not in decisions:decisions.append(d)
+                    trace=dict(deepcopy(d),scope=scope if status=='Yes' else None,possible_scope=scope if status=='Defer' and not relation_uncertain else None,status=status,hops=len(next_edges))
+                    if trace not in paths[target]:paths[target].append(trace)
+                    if not terminal:queue.append((target,scope,next_field,next_edges,next_nodes,status=='Defer',relation_uncertain if mode!='untyped' else False))
+    items=[]
+    for ident in sorted(set(nodes)-{root}):
+        traces=paths[ident];definite=[p for p in traces if p['status']=='Yes'];scopes=[]
         for p in definite:
-            if p["scope"] is not None and p["scope"] not in scopes:
-                scopes.append(p["scope"])
-        items.append({"ko_id": ident, "title": nodes[ident]["title"], "status": status,
-                      "directness": ("direct" if any(p["hops"] == 1 for p in definite) else "indirect") if definite else "unresolved" if traces else "none",
-                      "affected_scopes": scopes, "has_uncertainty": any(p["status"] == "Defer" for p in traces), "paths": traces})
-    return {"prototype_version": VERSION, "snapshot_id": snapshot.get("snapshot_id", snapshot.get("id")),
-            "input_sha256": fingerprint(snapshot), "mode": mode, "max_hops": max_hops,
-            "scope_supported": mode != "untyped", "items": items, "decisions": decisions,
-            "visited_states": visited, "review_volume": sum(i["status"] in {"Yes", "Defer"} for i in items)}
+            if p['scope'] is not None and p['scope'] not in scopes:scopes.append(p['scope'])
+        items.append({'ko_id':ident,'title':nodes[ident]['title'],'status':'Yes' if definite else 'Defer' if traces else 'No','directness':('direct' if any(p['hops']==1 for p in definite) else 'indirect') if definite else 'unresolved' if traces else 'none','affected_scopes':scopes,'has_uncertainty':any(p['status']=='Defer' for p in traces),'paths':traces})
+    return {'prototype_version':VERSION,'snapshot_id':snapshot.get('snapshot_id',snapshot.get('id')),'input_sha256':fingerprint(snapshot),'mode':mode,'max_hops':max_hops,'scope_supported':mode!='untyped','items':items,'decisions':decisions,'visited_states':visited,'review_volume':sum(i['status'] in {'Yes','Defer'} for i in items)}

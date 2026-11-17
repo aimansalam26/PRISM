@@ -1,0 +1,16 @@
+{
+  "id": "REPLACE_WITH_CHANGE_ID",
+  "title": "REPLACE_WITH_CHANGE_TITLE",
+  "kind": "value_change",
+  "root_ko": "REPLACE_WITH_PROJECT::KO_ID_FROM_FINAL_PACKET",
+  "changed_fields": ["REPLACE_WITH_DECLARED_WATCHED_FIELD"],
+  "analysis_basis": "revised_clause_only",
+  "before": {
+    "version_id": "REPLACE_WITH_PREVIOUS_VERSION_OR_COMMIT",
+    "text": "REPLACE_WITH_EXACT_PREVIOUS_RULE_QUOTE",
+    "source": {
+      "file": "REPLACE_WITH_BEFORE_MARKDOWN_PATH",
+      "sha256": "REPLACE_WITH_BEFORE_FILE_SHA256"
+    }
+  }
+}

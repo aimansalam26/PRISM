@@ -18,7 +18,7 @@ BANNER = r'''
  |  __/ |  _ <  | |  ___) || |  | |
  |_|    |_| \_\|___||____/ |_|  |_|
 
- HUMAN ANNOTATION WORKBENCH                         v0.12
+ HUMAN ANNOTATION WORKBENCH                         v0.13
  -------------------------------------------------------
  Source evidence -> Proposed KOs -> Human review
 '''
@@ -189,11 +189,16 @@ def open_traversal():
     print('Traversal workspace:',result['url'])
     print('The server stays open so review sessions remain available. Use the Annotation link to return to a running annotator.')
 
+def build_scenario():
+    script=HERE.parent/'build_handbook_scenario.py'
+    if not script.is_file():raise ValueError('Install the matching traversal update in the PRISM root first.')
+    subprocess.run([sys.executable,str(script)],cwd=HERE.parent,check=False)
+
 def main():
     ap=argparse.ArgumentParser(description='PRISM human annotation workbench')
-    ap.add_argument('action',nargs='?',choices=['new','open','settings','help','candidates','propose-edges','verify','traversal']);args=ap.parse_args()
+    ap.add_argument('action',nargs='?',choices=['new','open','settings','help','candidates','propose-edges','verify','traversal','build-scenario']);args=ap.parse_args()
     c=read_config()
-    actions={'new':lambda:new_project(c),'open':lambda:reopen(c),'settings':lambda:configure(c),'help':help_text,'candidates':lambda:candidate_export(c),'propose-edges':lambda:propose_edges(c),'verify':lambda:reopen(c,verify=True),'traversal':open_traversal}
+    actions={'new':lambda:new_project(c),'open':lambda:reopen(c),'settings':lambda:configure(c),'help':help_text,'candidates':lambda:candidate_export(c),'propose-edges':lambda:propose_edges(c),'verify':lambda:reopen(c,verify=True),'traversal':open_traversal,'build-scenario':build_scenario}
     if args.action:
         actions[args.action]();return
     while True:
@@ -206,11 +211,12 @@ def main():
         print('  [6] Propose edge types with Ollama / Gemini')
         print('  [7] Final verification (no extraction prompts)')
         print('  [8] Open traversal workspace')
+        print('  [9] Build traversal scenario from verified annotations')
         print('  [0] Exit\n')
         answer=input('  prism > ').strip()
         if answer=='0':print('Goodbye. Saved annotations stay in your project folder.');return
-        action={'1':'new','2':'open','3':'settings','4':'help','5':'candidates','6':'propose-edges','7':'verify','8':'traversal'}.get(answer)
-        if not action:print('Choose 0–8.');continue
+        action={'1':'new','2':'open','3':'settings','4':'help','5':'candidates','6':'propose-edges','7':'verify','8':'traversal','9':'build-scenario'}.get(answer)
+        if not action:print('Choose 0–9.');continue
         try:actions[action]()
         except (ValueError,OSError,json.JSONDecodeError) as e:print('\nCould not continue:',e)
         except KeyboardInterrupt:print('\nCancelled. Returning to menu.')
