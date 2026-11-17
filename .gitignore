@@ -77,3 +77,5 @@ Desktop.ini
 # data_pipeline/raw_pilot/, evidence/, and curated research/gold datasets.
 # Export reviewed annotations to a dedicated versioned dataset folder before
 # freezing experiments; ignored working databases still need separate backups.
+
+data_pipeline/KEY.txt
