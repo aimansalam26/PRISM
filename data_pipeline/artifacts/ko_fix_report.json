@@ -1,0 +1,48 @@
+{
+  "exact_quote_matches": 103,
+  "total_kos": 103,
+  "pass_percentage": 100,
+  "provenance_checks_passed": true,
+  "changed_ko_ids": [
+    "KO_NL_MEDICAL_02",
+    "KO_NL_SICK_VACATION_20",
+    "KO_GLOBAL_BASELINE_01",
+    "KO_GLOBAL_BASELINE_02"
+  ],
+  "changes": [
+    {
+      "ko_id": "KO_GLOBAL_BASELINE_01",
+      "field": "source_quote",
+      "before": "Company-Wide Benefits are available to all GitLab team members worldwide, regardless of location (unless otherwise stated).",
+      "after": "**Company-Wide Benefits** are available to all GitLab team members worldwide, regardless of location (unless otherwise stated)."
+    },
+    {
+      "ko_id": "KO_GLOBAL_BASELINE_02",
+      "field": "source_quote",
+      "before": "Entity-Specific Benefits are additional benefits available to team members in countries where GitLab has established entities or uses Professional Employer Organizations (PEOs).",
+      "after": "**Entity-Specific Benefits** are additional benefits available to team members in countries where GitLab has established entities or uses Professional Employer Organizations (PEOs)."
+    },
+    {
+      "ko_id": "KO_NL_MEDICAL_02",
+      "field": "employment_types",
+      "before": [
+        "unspecified"
+      ],
+      "after": [
+        "full_time"
+      ]
+    },
+    {
+      "ko_id": "KO_NL_SICK_VACATION_20",
+      "field": "watched_fields",
+      "before": [
+        "vacation_days_pro_rata_on_termination"
+      ],
+      "after": [
+        "vacation_days_proration_partial_year"
+      ]
+    }
+  ],
+  "annotation_status": "Unchanged; still proposed",
+  "limitation": "Exact quote matching does not establish semantic correctness."
+}

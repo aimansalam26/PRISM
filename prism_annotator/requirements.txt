@@ -1,0 +1,4 @@
+pydantic>=2,<3
+Markdown>=3.7,<4
+bleach>=6,<7
+google-genai>=1.0,<3

@@ -1,0 +1,1451 @@
+{
+  "scope_filter": [
+    "NL_BIKE",
+    "NL_MEDICAL"
+  ],
+  "tfidf_fitted_corpus_size": 103,
+  "selected_ko_count": 18,
+  "candidate_count": 72,
+  "link_resolution_audit": {
+    "KO_NL_BIKE_05": [
+      {
+        "status": "external_non_handbook",
+        "target_url": "mailto:payroll@savvy-group.eu",
+        "matched_section_ids": []
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "candidate_id": "CAND_001",
+      "ko_a_id": "KO_NL_BIKE_01",
+      "ko_b_id": "KO_NL_BIKE_02",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "lexical_tfidf_cosine:0.530"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_002",
+      "ko_a_id": "KO_NL_BIKE_01",
+      "ko_b_id": "KO_NL_BIKE_03",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "lexical_tfidf_cosine:0.691"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_003",
+      "ko_a_id": "KO_NL_BIKE_01",
+      "ko_b_id": "KO_NL_BIKE_04",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "lexical_tfidf_cosine:0.507"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_004",
+      "ko_a_id": "KO_NL_BIKE_01",
+      "ko_b_id": "KO_NL_BIKE_05",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "lexical_tfidf_cosine:0.355"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_005",
+      "ko_a_id": "KO_NL_BIKE_01",
+      "ko_b_id": "KO_NL_BIKE_06",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "lexical_tfidf_cosine:0.372"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_006",
+      "ko_a_id": "KO_NL_BIKE_01",
+      "ko_b_id": "KO_NL_BIKE_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "lexical_tfidf_cosine:0.552"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_007",
+      "ko_a_id": "KO_NL_BIKE_01",
+      "ko_b_id": "KO_NL_BIKE_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "shared_exact_field:['bike_purchase_cap_eur']",
+        "dependency_cue_in_KO_NL_BIKE_08:['difference', 'over eur']",
+        "lexical_tfidf_cosine:0.752"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_008",
+      "ko_a_id": "KO_NL_BIKE_01",
+      "ko_b_id": "KO_NL_BIKE_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'cap', 'eur', 'purchase']",
+        "dependency_cue_in_KO_NL_BIKE_09:['applies to', 'first eur']",
+        "lexical_tfidf_cosine:0.756"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_009",
+      "ko_a_id": "KO_NL_BIKE_02",
+      "ko_b_id": "KO_NL_BIKE_03",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "lexical_tfidf_cosine:0.531"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_010",
+      "ko_a_id": "KO_NL_BIKE_02",
+      "ko_b_id": "KO_NL_BIKE_04",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "lexical_tfidf_cosine:0.411"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_011",
+      "ko_a_id": "KO_NL_BIKE_02",
+      "ko_b_id": "KO_NL_BIKE_05",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_012",
+      "ko_a_id": "KO_NL_BIKE_02",
+      "ko_b_id": "KO_NL_BIKE_06",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_013",
+      "ko_a_id": "KO_NL_BIKE_02",
+      "ko_b_id": "KO_NL_BIKE_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "lexical_tfidf_cosine:0.421"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_014",
+      "ko_a_id": "KO_NL_BIKE_02",
+      "ko_b_id": "KO_NL_BIKE_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "dependency_cue_in_KO_NL_BIKE_08:['difference', 'over eur']",
+        "lexical_tfidf_cosine:0.398"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_015",
+      "ko_a_id": "KO_NL_BIKE_02",
+      "ko_b_id": "KO_NL_BIKE_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "dependency_cue_in_KO_NL_BIKE_09:['applies to', 'first eur']",
+        "lexical_tfidf_cosine:0.376"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_016",
+      "ko_a_id": "KO_NL_BIKE_03",
+      "ko_b_id": "KO_NL_BIKE_04",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "lexical_tfidf_cosine:0.508"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_017",
+      "ko_a_id": "KO_NL_BIKE_03",
+      "ko_b_id": "KO_NL_BIKE_05",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_018",
+      "ko_a_id": "KO_NL_BIKE_03",
+      "ko_b_id": "KO_NL_BIKE_06",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "lexical_tfidf_cosine:0.363"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_019",
+      "ko_a_id": "KO_NL_BIKE_03",
+      "ko_b_id": "KO_NL_BIKE_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "lexical_tfidf_cosine:0.644"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_020",
+      "ko_a_id": "KO_NL_BIKE_03",
+      "ko_b_id": "KO_NL_BIKE_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "dependency_cue_in_KO_NL_BIKE_08:['difference', 'over eur']",
+        "lexical_tfidf_cosine:0.520"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_021",
+      "ko_a_id": "KO_NL_BIKE_03",
+      "ko_b_id": "KO_NL_BIKE_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['benefit', 'bike', 'purchase', 'tax']",
+        "dependency_cue_in_KO_NL_BIKE_09:['applies to', 'first eur']",
+        "lexical_tfidf_cosine:0.693"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_022",
+      "ko_a_id": "KO_NL_BIKE_04",
+      "ko_b_id": "KO_NL_BIKE_05",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_023",
+      "ko_a_id": "KO_NL_BIKE_04",
+      "ko_b_id": "KO_NL_BIKE_06",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_024",
+      "ko_a_id": "KO_NL_BIKE_04",
+      "ko_b_id": "KO_NL_BIKE_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "lexical_tfidf_cosine:0.403"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_025",
+      "ko_a_id": "KO_NL_BIKE_04",
+      "ko_b_id": "KO_NL_BIKE_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "dependency_cue_in_KO_NL_BIKE_08:['difference', 'over eur']",
+        "lexical_tfidf_cosine:0.381"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_026",
+      "ko_a_id": "KO_NL_BIKE_04",
+      "ko_b_id": "KO_NL_BIKE_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "dependency_cue_in_KO_NL_BIKE_09:['applies to', 'first eur']",
+        "lexical_tfidf_cosine:0.360"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_027",
+      "ko_a_id": "KO_NL_BIKE_05",
+      "ko_b_id": "KO_NL_BIKE_06",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'scheme']",
+        "lexical_tfidf_cosine:0.382"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_028",
+      "ko_a_id": "KO_NL_BIKE_05",
+      "ko_b_id": "KO_NL_BIKE_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_029",
+      "ko_a_id": "KO_NL_BIKE_05",
+      "ko_b_id": "KO_NL_BIKE_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "dependency_cue_in_KO_NL_BIKE_08:['difference', 'over eur']"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_030",
+      "ko_a_id": "KO_NL_BIKE_05",
+      "ko_b_id": "KO_NL_BIKE_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "dependency_cue_in_KO_NL_BIKE_09:['applies to', 'first eur']"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_031",
+      "ko_a_id": "KO_NL_BIKE_06",
+      "ko_b_id": "KO_NL_BIKE_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_032",
+      "ko_a_id": "KO_NL_BIKE_06",
+      "ko_b_id": "KO_NL_BIKE_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "dependency_cue_in_KO_NL_BIKE_08:['difference', 'over eur']"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_033",
+      "ko_a_id": "KO_NL_BIKE_06",
+      "ko_b_id": "KO_NL_BIKE_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "dependency_cue_in_KO_NL_BIKE_09:['applies to', 'first eur']"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_034",
+      "ko_a_id": "KO_NL_BIKE_07",
+      "ko_b_id": "KO_NL_BIKE_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'deduction', 'purchase', 'source']",
+        "dependency_cue_in_KO_NL_BIKE_08:['difference', 'over eur']",
+        "lexical_tfidf_cosine:0.646"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_035",
+      "ko_a_id": "KO_NL_BIKE_07",
+      "ko_b_id": "KO_NL_BIKE_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'purchase']",
+        "dependency_cue_in_KO_NL_BIKE_09:['applies to', 'first eur']",
+        "lexical_tfidf_cosine:0.444"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_036",
+      "ko_a_id": "KO_NL_BIKE_08",
+      "ko_b_id": "KO_NL_BIKE_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Bike to Work Scheme",
+        "related_field_tokens:['bike', 'cap', 'eur', 'purchase']",
+        "dependency_cue_in_KO_NL_BIKE_08:['difference', 'over eur']",
+        "dependency_cue_in_KO_NL_BIKE_09:['applies to', 'first eur']",
+        "lexical_tfidf_cosine:0.569"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_037",
+      "ko_a_id": "KO_NL_MEDICAL_01",
+      "ko_b_id": "KO_NL_MEDICAL_02",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.591"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_038",
+      "ko_a_id": "KO_NL_MEDICAL_01",
+      "ko_b_id": "KO_NL_MEDICAL_03",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.631"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_039",
+      "ko_a_id": "KO_NL_MEDICAL_01",
+      "ko_b_id": "KO_NL_MEDICAL_04",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.629"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_040",
+      "ko_a_id": "KO_NL_MEDICAL_01",
+      "ko_b_id": "KO_NL_MEDICAL_05",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.516"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_041",
+      "ko_a_id": "KO_NL_MEDICAL_01",
+      "ko_b_id": "KO_NL_MEDICAL_06",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.570"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_042",
+      "ko_a_id": "KO_NL_MEDICAL_01",
+      "ko_b_id": "KO_NL_MEDICAL_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_07:['prorated']",
+        "lexical_tfidf_cosine:0.499"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_043",
+      "ko_a_id": "KO_NL_MEDICAL_01",
+      "ko_b_id": "KO_NL_MEDICAL_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_08:['subject to']",
+        "lexical_tfidf_cosine:0.502"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_044",
+      "ko_a_id": "KO_NL_MEDICAL_01",
+      "ko_b_id": "KO_NL_MEDICAL_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_045",
+      "ko_a_id": "KO_NL_MEDICAL_02",
+      "ko_b_id": "KO_NL_MEDICAL_03",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'eligibility', 'medical']",
+        "lexical_tfidf_cosine:0.525"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_046",
+      "ko_a_id": "KO_NL_MEDICAL_02",
+      "ko_b_id": "KO_NL_MEDICAL_04",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.397"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_047",
+      "ko_a_id": "KO_NL_MEDICAL_02",
+      "ko_b_id": "KO_NL_MEDICAL_05",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.429"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_048",
+      "ko_a_id": "KO_NL_MEDICAL_02",
+      "ko_b_id": "KO_NL_MEDICAL_06",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.473"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_049",
+      "ko_a_id": "KO_NL_MEDICAL_02",
+      "ko_b_id": "KO_NL_MEDICAL_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_07:['prorated']",
+        "lexical_tfidf_cosine:0.414"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_050",
+      "ko_a_id": "KO_NL_MEDICAL_02",
+      "ko_b_id": "KO_NL_MEDICAL_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_08:['subject to']",
+        "lexical_tfidf_cosine:0.417"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_051",
+      "ko_a_id": "KO_NL_MEDICAL_02",
+      "ko_b_id": "KO_NL_MEDICAL_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_052",
+      "ko_a_id": "KO_NL_MEDICAL_03",
+      "ko_b_id": "KO_NL_MEDICAL_04",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.489"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_053",
+      "ko_a_id": "KO_NL_MEDICAL_03",
+      "ko_b_id": "KO_NL_MEDICAL_05",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.529"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_054",
+      "ko_a_id": "KO_NL_MEDICAL_03",
+      "ko_b_id": "KO_NL_MEDICAL_06",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.584"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_055",
+      "ko_a_id": "KO_NL_MEDICAL_03",
+      "ko_b_id": "KO_NL_MEDICAL_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_07:['prorated']",
+        "lexical_tfidf_cosine:0.511"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_056",
+      "ko_a_id": "KO_NL_MEDICAL_03",
+      "ko_b_id": "KO_NL_MEDICAL_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_08:['subject to']",
+        "lexical_tfidf_cosine:0.514"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_057",
+      "ko_a_id": "KO_NL_MEDICAL_03",
+      "ko_b_id": "KO_NL_MEDICAL_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_058",
+      "ko_a_id": "KO_NL_MEDICAL_04",
+      "ko_b_id": "KO_NL_MEDICAL_05",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.429"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_059",
+      "ko_a_id": "KO_NL_MEDICAL_04",
+      "ko_b_id": "KO_NL_MEDICAL_06",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.473"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_060",
+      "ko_a_id": "KO_NL_MEDICAL_04",
+      "ko_b_id": "KO_NL_MEDICAL_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_07:['prorated']",
+        "lexical_tfidf_cosine:0.415"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_061",
+      "ko_a_id": "KO_NL_MEDICAL_04",
+      "ko_b_id": "KO_NL_MEDICAL_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_08:['subject to']",
+        "lexical_tfidf_cosine:0.417"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_062",
+      "ko_a_id": "KO_NL_MEDICAL_04",
+      "ko_b_id": "KO_NL_MEDICAL_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_063",
+      "ko_a_id": "KO_NL_MEDICAL_05",
+      "ko_b_id": "KO_NL_MEDICAL_06",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "lexical_tfidf_cosine:0.512"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_064",
+      "ko_a_id": "KO_NL_MEDICAL_05",
+      "ko_b_id": "KO_NL_MEDICAL_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_07:['prorated']",
+        "lexical_tfidf_cosine:0.448"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_065",
+      "ko_a_id": "KO_NL_MEDICAL_05",
+      "ko_b_id": "KO_NL_MEDICAL_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_08:['subject to']",
+        "lexical_tfidf_cosine:0.451"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_066",
+      "ko_a_id": "KO_NL_MEDICAL_05",
+      "ko_b_id": "KO_NL_MEDICAL_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_067",
+      "ko_a_id": "KO_NL_MEDICAL_06",
+      "ko_b_id": "KO_NL_MEDICAL_07",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_07:['prorated']",
+        "lexical_tfidf_cosine:0.495"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_068",
+      "ko_a_id": "KO_NL_MEDICAL_06",
+      "ko_b_id": "KO_NL_MEDICAL_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_08:['subject to']",
+        "lexical_tfidf_cosine:0.497"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_069",
+      "ko_a_id": "KO_NL_MEDICAL_06",
+      "ko_b_id": "KO_NL_MEDICAL_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_070",
+      "ko_a_id": "KO_NL_MEDICAL_07",
+      "ko_b_id": "KO_NL_MEDICAL_08",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "related_field_tokens:['allowance', 'medical']",
+        "dependency_cue_in_KO_NL_MEDICAL_07:['prorated']",
+        "dependency_cue_in_KO_NL_MEDICAL_08:['subject to']",
+        "lexical_tfidf_cosine:0.436"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_071",
+      "ko_a_id": "KO_NL_MEDICAL_07",
+      "ko_b_id": "KO_NL_MEDICAL_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "dependency_cue_in_KO_NL_MEDICAL_07:['prorated']"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    },
+    {
+      "candidate_id": "CAND_072",
+      "ko_a_id": "KO_NL_MEDICAL_08",
+      "ko_b_id": "KO_NL_MEDICAL_09",
+      "retrieval_reasons": [
+        "same_benefit_heading:Medical Allowance",
+        "dependency_cue_in_KO_NL_MEDICAL_08:['subject to']"
+      ],
+      "reference_hints": [],
+      "jurisdiction_comparison": {
+        "ko_a_jurisdictions": [
+          "NL"
+        ],
+        "ko_b_jurisdictions": [
+          "NL"
+        ],
+        "exact_set_match": true
+      }
+    }
+  ]
+}

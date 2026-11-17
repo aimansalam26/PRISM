@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>PRISM · Policy review workspace</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to workspace</a>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="PRISM home">
+      <svg width="37" height="37" viewBox="0 0 44 44" aria-hidden="true"><defs><linearGradient id="brand-spectrum" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#48dce7"/><stop offset=".5" stop-color="#7871ed"/><stop offset="1" stop-color="#e2a6e0"/></linearGradient></defs><path d="M22 4 41 37H3Z" fill="none" stroke="url(#brand-spectrum)" stroke-width="2.3"/><path d="M22 4v24L3 37m19-9 19 9" fill="none" stroke="#73739d" stroke-width="1.2"/></svg>
+      <span>PRISM<small>POLICY INTELLIGENCE</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav active" data-view="workspace" aria-pressed="true">Review workspace</button>
+      <button class="nav" data-view="comparison" aria-pressed="false">Method comparison</button>
+      <button class="nav" data-view="data" aria-pressed="false">Data &amp; exports</button>
+    </nav>
+    <div class="top-actions"><span class="local-tag"><i></i> Local session</span><button class="button subtle" id="open-upload"><span aria-hidden="true">↑</span> Upload</button><button class="button primary" id="export-main" disabled><span aria-hidden="true">↓</span> Export Excel</button></div>
+  </header>
+
+  <main id="main" class="page">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy"><p class="eyebrow light">A CLEARER VIEW OF CHANGE</p><h1 id="hero-title">Every policy change.<br><span>A clearer path forward.</span></h1><p>Discover what needs review, understand the scope,<br class="desktop-break"> and follow the evidence to a human decision.</p><div class="hero-tags"><span>Human review first</span><span>Traceable by design</span><span id="depth-badge">Up to 3 impact steps</span></div></div>
+      <svg class="prism-art" viewBox="0 0 610 290" aria-hidden="true"><defs><linearGradient id="glass" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#b4d9ff" stop-opacity=".2"/><stop offset="1" stop-color="#8873fb" stop-opacity=".025"/></linearGradient><linearGradient id="prism-edge" x1="0" x2="1"><stop stop-color="#93eaf6"/><stop offset=".55" stop-color="#c1c3ff"/><stop offset="1" stop-color="#c392e6"/></linearGradient><linearGradient id="ray" x1="0" x2="1"><stop stop-color="#a6cbeb" stop-opacity="0"/><stop offset="1" stop-color="#d7eefc"/></linearGradient></defs><path d="M0 168h238" stroke="url(#ray)" stroke-width="1.4"/><path d="m286 37 112 193H174Z" fill="url(#glass)" stroke="url(#prism-edge)" stroke-width="1.4"/><path d="m286 37 0 156-112 37m112-37 112 37" fill="none" stroke="#b1c9ef" stroke-opacity=".38"/><path d="m238 168 105-24" stroke="#d6e8fb" stroke-opacity=".7"/><g fill="none" stroke-width="1.5"><path d="m343 144 245-94" stroke="#84dbf3" opacity=".85"/><path d="m343 149 245-67" stroke="#80baf4" opacity=".8"/><path d="m343 154 245-38" stroke="#a39af7" opacity=".8"/><path d="m343 159 245-9" stroke="#c692e5" opacity=".8"/><path d="m343 164 245 20" stroke="#edacb6" opacity=".75"/><path d="m343 169 245 51" stroke="#e9c68c" opacity=".8"/></g><circle cx="238" cy="168" r="3" fill="#d8efff"/><circle cx="343" cy="154" r="3" fill="#efe9ff"/><text x="30" y="193" fill="#9babc0" font-size="10" letter-spacing="2">POLICY CHANGE</text><text x="429" y="258" fill="#9babc0" font-size="10" letter-spacing="2">SCOPE · PATH · EVIDENCE</text></svg>
+    </section>
+
+    <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+    <div id="loading" class="loading" role="status" hidden><span class="spinner"></span><span id="loading-text">Analysing the corpus…</span></div>
+    <div class="corpus-bar"><div><span class="status-dot"></span><strong id="corpus-name">Loading development corpus</strong><span id="corpus-meta">Preparing the workspace</span></div><button class="text-button" id="download-session" disabled>↓ Save review session<span id="unsaved-indicator" hidden> · unsaved notes</span></button></div>
+
+    <section class="metrics" aria-label="Corpus prediction totals">
+      <article><span class="metric-label">Candidates assessed</span><strong id="count-all">—</strong><span id="event-count">Across the active corpus</span><div class="metric-symbol muted" aria-hidden="true">▦</div></article>
+      <article><span class="metric-label">Human review queue</span><strong id="count-queue">—</strong><span id="queue-breakdown">Supported + deferred</span><div class="metric-symbol violet" aria-hidden="true">↗</div></article>
+      <article><span class="metric-label">Needs clarification</span><strong id="count-defer">—</strong><span>Deferred for human inspection</span><div class="metric-symbol amber" aria-hidden="true">?</div></article>
+      <article><span class="metric-label">Not selected</span><strong id="count-no">—</strong><span>No supported path in this run</span><div class="metric-symbol mint" aria-hidden="true">−</div></article>
+    </section>
+
+    <section id="view-workspace" class="view">
+      <div class="section-heading"><div><p class="eyebrow">REVIEW WORKSPACE</p><h2>The right context for every candidate.</h2></div><span class="quiet-label">Predictions for inspection · no automatic policy changes</span></div>
+      <div class="review-grid">
+        <section class="panel candidate-panel" aria-label="Candidate list">
+          <div class="panel-heading"><h3>Policy candidates <span class="count-chip" id="visible-count">0</span></h3><button class="text-button" id="reset-filters">Reset filters</button></div>
+          <div class="filters"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search title, policy text or KO ID…" aria-label="Search candidates"></label><label class="sr-only" for="scenario-filter">Change event</label><select id="scenario-filter"><option value="all">All change events</option></select></div>
+          <div class="status-tabs" role="group" aria-label="Filter by PRISM prediction"><button class="selected" data-filter="all" aria-pressed="true">All candidates</button><button data-filter="queue" aria-pressed="false">Review queue</button><button data-filter="Defer" aria-pressed="false">Deferred</button><button data-filter="No" aria-pressed="false">Not selected</button></div>
+          <div class="table-scroll"><table class="candidate-table"><thead><tr><th>Knowledge object</th><th>PRISM decision</th><th>Impact</th></tr></thead><tbody id="candidate-rows"></tbody></table><div id="no-candidates" class="empty" hidden>No candidates match these filters. Try another event or clear your search.</div></div>
+          <div class="table-foot"><span><i class="tiny-dot violet-dot"></i> Select a candidate to inspect its evidence</span><span id="table-total">0 candidates</span></div>
+        </section>
+        <aside class="panel evidence-panel" aria-label="Selected candidate evidence" id="evidence-panel"><div class="empty">Load a corpus to inspect a candidate.</div></aside>
+      </div>
+      <section class="panel change-panel" id="change-panel" hidden></section>
+    </section>
+
+    <section id="view-comparison" class="view" hidden>
+      <div class="section-heading"><div><p class="eyebrow">METHOD COMPARISON</p><h2>See what remembering the path changes.</h2></div><span class="quiet-label">Same curated corpus · same impact-step limit</span></div>
+      <div id="comparison-cards" class="comparison-cards"></div>
+      <section class="panel"><div class="panel-heading"><h3>Where the methods disagree</h3><span id="difference-count" class="count-chip"></span></div><div class="table-scroll"><table class="comparison-table"><thead><tr><th>Candidate</th><th>PRISM</th><th>Local</th><th>Untyped</th><th></th></tr></thead><tbody id="comparison-rows"></tbody></table></div></section>
+      <div class="explanation-grid"><article><h3>What this comparison tells you</h3><p>The local method uses the same curated relationships but forgets earlier scope restrictions at later steps. It helps investigate the value of accumulated path state.</p></article><article><h3>What remains to be measured</h3><p>A smaller queue is not proof of better accuracy. Compare predictions with independent human labels. Semantic and diff-led lexical baselines are not implemented in this release.</p></article></div>
+      <section class="panel evaluation-panel"><div class="panel-heading"><div><h3>Independent-label evaluation</h3><p>Optional · upload your completed, frozen label workbook.</p></div><button class="button subtle" id="upload-gold" disabled>↑ Upload labels .xlsx</button></div><div id="evaluation-body" class="evaluation-body"><p>Accuracy has not been scored. The blank template cannot produce scores. Stakeholder notes do not become gold labels.</p></div></section>
+    </section>
+
+    <section id="view-data" class="view" hidden>
+      <div class="section-heading"><div><p class="eyebrow">DATA &amp; EXPORTS</p><h2>Your evidence, ready to inspect and share.</h2></div></div>
+      <div class="data-grid"><section class="panel data-card"><span class="card-icon">↑</span><h3>Bring in a corpus</h3><p>Upload a schema 0.3 JSON corpus or one scenario. Existing Word and PDF policies first need curated KOs, relationships and scopes.</p><button class="button primary" id="upload-corpus-data">Choose JSON file</button><button class="text-button" id="load-sample">Load bundled development corpus</button><p class="fine">Source files are not overwritten. Uploaded content is processed by this local Python app.</p></section><section class="panel data-card"><span class="card-icon">↺</span><h3>Resume a review</h3><p>A downloaded review session contains the corpus, impact-step limit and stakeholder notes. Upload it here to recompute predictions and restore the notes.</p><button class="button subtle" id="restore-session">Open review session</button><p class="fine">Working notes stay in this browser tab until you download them. Reloading the page starts a fresh workspace.</p></section></div>
+      <section class="panel settings-panel"><div><h3>Traversal boundary</h3><p>Applies equally to PRISM, local and untyped traversal.</p></div><label for="max-hops">Maximum impact steps</label><select id="max-hops"><option value="1">1 step</option><option value="2">2 steps</option><option value="3" selected>3 steps</option></select><button class="button subtle" id="rerun" disabled>Re-run corpus</button></section>
+      <div class="section-heading small"><h3>Download centre</h3><span class="quiet-label">Exports include the whole active corpus, regardless of visible filters.</span></div>
+      <div class="download-grid" id="download-grid"></div>
+      <section class="panel provenance-panel" id="provenance"></section>
+    </section>
+    <footer><span>PRISM <span class="footer-separator">/</span> Human-governed policy review</span><span>Development prototype · Curated metadata · Bounded discovery</span></footer>
+  </main>
+
+  <dialog id="upload-dialog"><div class="dialog-head"><div><p class="eyebrow">START WITH YOUR EVIDENCE</p><h2>Load a review workspace</h2></div><button class="icon-button" id="close-upload" aria-label="Close upload dialog">×</button></div><p>Choose a PRISM schema 0.3 corpus, a single scenario, or a previously downloaded review session.</p><button class="dropzone" id="file-zone"><span aria-hidden="true">↑</span><strong>Choose a JSON file</strong><small>or drag and drop it here · maximum 5 MB</small></button><div class="dialog-note"><strong>What can I upload?</strong><p>Use <code>data/scenarios.json</code>, <code>data/policies.json</code> or <code>PRISM_review_session.json</code>. Raw policy PDFs and results-only JSON are not supported inputs.</p></div><button class="text-button" id="sample-dialog">Use bundled development corpus instead →</button></dialog>
+  <input type="file" id="corpus-file" accept=".json,application/json" hidden>
+  <input type="file" id="gold-file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
+</body>
+</html>

@@ -1,0 +1,12 @@
+'use strict';
+(function(){
+ const nav=document.querySelector('nav.tabs')||document.querySelector('nav');if(!nav)return;
+ const switcher=document.createElement('button');switcher.textContent='Open traversal';switcher.type='button';switcher.className='workspace-switch';
+ switcher.onclick=async()=>{
+  const win=window.open('about:blank','prism-traversal');switcher.disabled=true;switcher.textContent='Opening…';
+  try{const token=document.querySelector('meta[name="prism-token"]')?.content||window.PRISM_TOKEN;const res=await fetch('/api/workspace/traversal',{method:'POST',headers:{'Content-Type':'application/json','X-PRISM-Token':token},body:'{}'});const data=await res.json();if(!res.ok)throw Error(data.error);if(win)win.location=data.url;else window.location.href=data.url}
+  catch(e){if(win)win.close();alert(e.message)}finally{switcher.disabled=false;switcher.textContent='Open traversal'}
+ };nav.append(switcher);
+ const audit=document.createElement('button');audit.textContent='Traversal compatibility';audit.type='button';
+ audit.onclick=async()=>{try{const r=await fetch('/api/engine-compatibility');if(!r.ok)throw Error('Could not read compatibility report.');const d=await r.json();let dialog=document.getElementById('compatibilityDialog');if(!dialog){dialog=document.createElement('dialog');dialog.id='compatibilityDialog';document.body.append(dialog)}dialog.replaceChildren();const body=document.createElement('div');body.className='dialog-body';const title=document.createElement('h2');title.textContent='Traversal compatibility';body.append(title);const intro=document.createElement('p');intro.textContent='Annotation and traversal use different schemas. These items need resolving before creating an engine scenario.';body.append(intro);const list=document.createElement('ul');for(const text of [...d.required_adapter_work,...d.engine_limitations]){const li=document.createElement('li');li.textContent=text;list.append(li)}body.append(list);const details=document.createElement('details'),summary=document.createElement('summary'),pre=document.createElement('pre');summary.textContent=d.issues.length+' record checks';pre.textContent=d.issues.map(x=>x.record+' · '+x.message).join('\n')||'No record checks; schema adaptation is still required.';details.append(summary,pre);body.append(details);const close=document.createElement('button');close.textContent='Close';close.onclick=()=>dialog.close();body.append(close);dialog.append(body);dialog.showModal()}catch(e){alert(e.message)}};nav.append(audit);
+})();

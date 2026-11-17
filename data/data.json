@@ -1,0 +1,222 @@
+{
+  "schema_version": "0.3",
+  "snapshot_id": "HB001-draft-assumption-variant-v1",
+  "purpose": "historically_grounded_development_pilot_with_explicit_abstractions",
+  "scenarios": [
+    {
+      "id": "HB001-bike-limit",
+      "title": "Netherlands bike limit: historical development pilot",
+      "schema_version": "0.3",
+      "snapshot_id": "HB001-draft-assumption-variant-v1",
+      "event": {
+        "id": "CHANGE-HB001",
+        "kind": "value_change",
+        "recorded_at": "2023-10-24T12:34:01Z",
+        "root_ko": "HB001-A-v2",
+        "commit_sha": "b618da3d87c1312319c146b35d45148c5461b202",
+        "parent_sha": "282cf0af0690a65a26d278e33191369c66b541da",
+        "changed_fields": [
+          "bike_to_work_limit_eur"
+        ],
+        "before": {
+          "version_id": "HB001-A-v1",
+          "text": "Cycle to work will have a maximum expenditure of 1200 EUR for a bike.",
+          "scope": {
+            "roles": [
+              "*"
+            ],
+            "jurisdictions": [
+              "NL"
+            ],
+            "organisations": [
+              "*"
+            ],
+            "start": "0001-01-01",
+            "end": "9999-12-31"
+          },
+          "source": "https://gitlab.com/gitlab-com/content-sites/handbook/-/blob/282cf0af0690a65a26d278e33191369c66b541da/content/handbook/total-rewards/benefits/general-and-entity-benefits/bv-benefits-netherlands.md"
+        },
+        "after": {
+          "version_id": "HB001-A-v2",
+          "text": "Cycle to work will have a maximum expenditure of 2500 EUR for a bike.",
+          "scope": {
+            "roles": [
+              "*"
+            ],
+            "jurisdictions": [
+              "NL"
+            ],
+            "organisations": [
+              "*"
+            ],
+            "start": "0001-01-01",
+            "end": "9999-12-31"
+          },
+          "source": "https://gitlab.com/gitlab-com/content-sites/handbook/-/blob/b618da3d87c1312319c146b35d45148c5461b202/content/handbook/total-rewards/benefits/general-and-entity-benefits/bv-benefits-netherlands.md"
+        },
+        "change_scope": {
+          "roles": [
+            "*"
+          ],
+          "jurisdictions": [
+            "NL"
+          ],
+          "organisations": [
+            "*"
+          ],
+          "start": "0001-01-01",
+          "end": "9999-12-31"
+        },
+        "scope_change": false,
+        "relationship_changes": [],
+        "analysis_basis": "unchanged_population_value_or_rule_change"
+      },
+      "nodes": [
+        {
+          "id": "HB001-A-v2",
+          "title": "Netherlands bike expenditure limit",
+          "text": "Cycle to work will have a maximum expenditure of 2500 EUR for a bike.",
+          "scope": {
+            "roles": [
+              "*"
+            ],
+            "jurisdictions": [
+              "NL"
+            ],
+            "organisations": [
+              "*"
+            ],
+            "start": "0001-01-01",
+            "end": "9999-12-31"
+          },
+          "source": "https://gitlab.com/gitlab-com/content-sites/handbook/-/blob/b618da3d87c1312319c146b35d45148c5461b202/content/handbook/total-rewards/benefits/general-and-entity-benefits/bv-benefits-netherlands.md",
+          "provenance_note": "Revised sentence transcribed from user-supplied git diff; full after-file not independently re-extracted in this build."
+        },
+        {
+          "id": "HB001-C01",
+          "title": "GitLab BV (Netherlands) Benefits — Excess-purchase instructions",
+          "text": "If a team member would want to purchase a bike more expensive than the 1200 EUR maximum the process is as follows:\n\n- HRSavvy will invoice the seller for the entirety of the bike.\n- The difference between the cost of the bike and 1200 EUR will be deducted from the team member's net salary.\n- This means the team member will only have a tax benefit over the first 1200 euro.",
+          "scope": {
+            "roles": [
+              "*"
+            ],
+            "jurisdictions": [
+              "NL"
+            ],
+            "organisations": [
+              "*"
+            ],
+            "start": "0001-01-01",
+            "end": "9999-12-31"
+          },
+          "source": "https://gitlab.com/gitlab-com/content-sites/handbook/-/blob/282cf0af0690a65a26d278e33191369c66b541da/content/handbook/total-rewards/benefits/general-and-entity-benefits/bv-benefits-netherlands.md#L131",
+          "source_revision": "282cf0af0690a65a26d278e33191369c66b541da",
+          "discovery_method": "same_section",
+          "scope_evidence": "GitLab BV (Netherlands) benefits specific to Netherlands based team members."
+        },
+        {
+          "id": "HB001-C02",
+          "title": "GitLab BV (Netherlands) Benefits — Repeat-use interval",
+          "text": "The team members can avail this benefit every 2 years. This duration will be calculated based on the start date of the previously availed bike scheme benefit.",
+          "scope": {
+            "roles": [
+              "*"
+            ],
+            "jurisdictions": [
+              "NL"
+            ],
+            "organisations": [
+              "*"
+            ],
+            "start": "0001-01-01",
+            "end": "9999-12-31"
+          },
+          "source": "https://gitlab.com/gitlab-com/content-sites/handbook/-/blob/282cf0af0690a65a26d278e33191369c66b541da/content/handbook/total-rewards/benefits/general-and-entity-benefits/bv-benefits-netherlands.md#L122",
+          "source_revision": "282cf0af0690a65a26d278e33191369c66b541da",
+          "discovery_method": "same_section",
+          "scope_evidence": "GitLab BV (Netherlands) benefits specific to Netherlands based team members."
+        },
+        {
+          "id": "HB001-C03",
+          "title": "GitLab Ireland Ltd — Bike-scheme terms",
+          "text": "From 2021, Cycle to work will have a maximum expenditure of 1250 EUR or 1500 EUR for an electric bike. The scheme may now be availed of once in 4 consecutive tax years, previously this was once every 5 years.",
+          "scope": {
+            "roles": [
+              "*"
+            ],
+            "jurisdictions": [
+              "IE"
+            ],
+            "organisations": [
+              "*"
+            ],
+            "start": "0001-01-01",
+            "end": "9999-12-31"
+          },
+          "source": "https://gitlab.com/gitlab-com/content-sites/handbook/-/blob/282cf0af0690a65a26d278e33191369c66b541da/content/handbook/total-rewards/benefits/general-and-entity-benefits/gitlab-ireland-ltd.md#L95",
+          "source_revision": "282cf0af0690a65a26d278e33191369c66b541da",
+          "discovery_method": "keyword_search",
+          "scope_evidence": "Discover GitLab's benefits for team members in Ireland"
+        },
+        {
+          "id": "HB001-C04",
+          "title": "GitLab LTD (UK) Benefits — Bike-scheme terms",
+          "text": "There is a limit of £1000 for the total cost of the bicycle and accessories. The scheme may now be availed of once in 4 consecutive tax years, previously this was once every 5 years.",
+          "scope": {
+            "roles": [
+              "*"
+            ],
+            "jurisdictions": [
+              "GB"
+            ],
+            "organisations": [
+              "*"
+            ],
+            "start": "0001-01-01",
+            "end": "9999-12-31"
+          },
+          "source": "https://gitlab.com/gitlab-com/content-sites/handbook/-/blob/282cf0af0690a65a26d278e33191369c66b541da/content/handbook/total-rewards/benefits/general-and-entity-benefits/ltd-benefits-uk.md#L389",
+          "source_revision": "282cf0af0690a65a26d278e33191369c66b541da",
+          "discovery_method": "keyword_search",
+          "scope_evidence": "GitLab LTD (UK) benefits specific to UK based team members."
+        }
+      ],
+      "relationships": [
+        {
+          "id": "HB001-E01",
+          "prerequisite": "HB001-A-v2",
+          "dependent": "HB001-C01",
+          "type": "DEPENDS_ON",
+          "field": "bike_to_work_limit_eur",
+          "scope": {
+            "roles": [
+              "*"
+            ],
+            "jurisdictions": [
+              "NL"
+            ],
+            "organisations": [
+              "*"
+            ],
+            "start": "0001-01-01",
+            "end": "9999-12-31"
+          },
+          "source": "https://gitlab.com/gitlab-com/content-sites/handbook/-/blob/282cf0af0690a65a26d278e33191369c66b541da/content/handbook/total-rewards/benefits/general-and-entity-benefits/bv-benefits-netherlands.md#L131",
+          "certainty": "confirmed",
+          "evidence": "If a team member would want to purchase a bike more expensive than the 1200 EUR maximum the process is as follows:\n\n- HRSavvy will invoice the seller for the entirety of the bike.\n- The difference between the cost of the bike and 1200 EUR will be deducted from the team member's net salary.\n- This means the team member will only have a tax benefit over the first 1200 euro.",
+          "curation_note": "Draft curator interpretation: excess-payment calculation uses the scheme maximum. confirmed denotes the proposed model interpretation, not expert approval or gold status."
+        }
+      ],
+      "curation_assumptions": {
+        "status": "draft_requires_independent_representation_review",
+        "roles": "Role distinctions are intentionally abstracted out for this pilot: * means universal in the abstract model, NOT evidence that every employment category is eligible.",
+        "organisations": "Department distinctions are intentionally abstracted out: * is a modelling assumption, NOT an extracted eligibility claim.",
+        "time": "All intervals are unbounded model sentinels. The pilot suppresses temporal filtering; it does not assert actual commencement, expiry, or simultaneous policy validity. Commit time is recorded_at only.",
+        "interpretation": "Conditional experiment: revised root against pre-change candidate guidance. Not a claim of stale guidance after the real commit.",
+        "coverage": "Four exploratory candidates only; no multi-hop or scope-pruning evidence; unknown metadata is documented here but the engine does not reason over these notes."
+      },
+      "evaluation_status": "No independent gold labels. Not held-out evidence.",
+      "candidate_selection_note": "Unconnected candidates retained deliberately; no relation is inferred merely from shared topic or co-location."
+    }
+  ]
+}
